@@ -1,0 +1,35 @@
+﻿body {
+    margin: 40px;
+}
+
+div {
+    font-size: 25px;
+    margin-bottom: 10px;
+}
+
+.timerButton {
+    cursor: pointer;
+    display: inline-block;
+    padding: 10px;
+    border-radius: 50px;
+    background-color: #b0e0e6;
+}
+
+img {
+    width: 30px;
+    height: 30px;
+}
+
+#progressBar {
+    width: 500px;
+    display: block;
+    padding: 0px;
+    border: 2px solid black;
+    height: 30px;
+}
+
+    #progressBar div {
+        display: inline-block;
+        height: 100%;
+        margin: 0px;
+    }

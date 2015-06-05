@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Timer Sample</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <script type="text/javascript" src="scripts/jquery-2.1.4.js"></script>
+    <script type="text/javascript" src="scripts/timer.js"></script>
+    <script type="text/javascript" src="scripts/index.js"></script>
+</head>
+<body>
+
+    <div id="time">
+        00.00.00.0000
+    </div>
+    <div>
+        <div class="timerButton" id="start"><img src="/Images/1432692801_play-circle-outline.png" /></div>
+
+        <div class="timerButton" id="pause"><img src="/Images/1432692809_pause-circle-outline.png" /></div>
+
+        <div class="timerButton" id="reset"><img src="/Images/1432692816_loop.png" /></div>
+    </div>
+    <div id="progressBar">
+        <div id="filledBar"></div>
+        <div id="emptyBar"></div>
+    </div>
+    <div>
+        <label>Goal:</label>
+        <input type="text" id="goal" name="goal" value="00:00:00">
+    </div>
+</body>
+</html>

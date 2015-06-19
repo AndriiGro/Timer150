@@ -1,5 +1,10 @@
-﻿/// <reference path="jquery-2.1.4.js" />
+/// <reference path="jquery-2.1.4.js" />
 /// <reference path="timer.js" />
+
+const MILI_SECONDS_IN_HOUR = 3600 * 1000;
+const MILI_SECONDS_IN_MINUTE = 60 * 1000;
+const MILI_SECONDS_IN_SECOND = 1000;
+
 $(document).ready(function () {
     var timer = new Timer();
     $('#start').click(function () {
@@ -25,14 +30,20 @@ $(document).ready(function () {
     });
     function showTime() {
         var currentTime = timer.getElapsedMilliseconds();
-        var milliseconds = currentTime % 1000;
-        currentTime = (currentTime - milliseconds) / 1000;
-        var seconds = currentTime % 60;
-        currentTime = (currentTime - seconds) / 60;
-        var minutes = currentTime % 60;
-        var hours = currentTime / 60;
-        $('#time').html(hours + "." + minutes + "." + seconds + "." + milliseconds);
+        var hours = Math.floor(currentTime / MILI_SECONDS_IN_HOUR);
+        currentTime -= hours * MILI_SECONDS_IN_HOUR;
+        var minutes = Math.floor(currentTime / MILI_SECONDS_IN_MINUTE);
+        currentTime -= minutes * MILI_SECONDS_IN_MINUTE;
+        var seconds = Math.floor(currentTime / MILI_SECONDS_IN_SECOND);
+        currentTime -= MILI_SECONDS_IN_SECOND * seconds;
+        $('#time').html(pad(hours,2) + "." + pad(minutes,2) + "." + pad(seconds,2) + "." + pad(currentTime,2));
         showProgressBar();
+    }
+
+    function pad(n, width, z) {
+        z = z || '0';
+        n = n + '';
+        return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
     }
 
     function showProgressBar() {

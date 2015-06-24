@@ -24,8 +24,17 @@
         <div id="emptyBar"></div>
     </div>
     <div>
-        <label>Goal:</label>
-        <input type="text" id="goal" name="goal" value="00:00:00">
+        <span>Goal:</span>
+        <span id="goal">None</span>
+        <button id="editGoal" class="goalInput"><img src="Images/editor_pencil_pen_edit_write_-128.png" /> </button>
+        <form id="goalForm">
+            <input class="goalInput" id="goalHours" type="text" maxlength="2" value="00"/>
+            <input class="goalInput" id="goalMinutes" type="text" maxlength="2" value="00" />
+            <input class="goalInput" id="goalSeconds" type="text" maxlength="2" value="00" />
+            <button class="goalInput" id="goalSubmit">
+                <img src="Images/1435186397_check-mark-80px.png" />
+            </button>
+        </form>
     </div>
 </body>
 </html>

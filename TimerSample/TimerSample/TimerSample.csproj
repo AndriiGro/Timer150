@@ -60,6 +60,8 @@
     <Content Include="Images\1432692801_play-circle-outline.png" />
     <Content Include="Images\1432692809_pause-circle-outline.png" />
     <Content Include="Images\1432692816_loop.png" />
+    <Content Include="Images\1435186397_check-mark-80px.png" />
+    <Content Include="Images\editor_pencil_pen_edit_write_-128.png" />
     <Content Include="index.html" />
     <Content Include="Scripts\index.js" />
     <Content Include="packages.config" />

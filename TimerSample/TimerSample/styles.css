@@ -23,7 +23,7 @@ img {
 #progressBar {
     width: 500px;
     display: block;
-    padding: 0px;
+    padding: 0;
     border: 2px solid black;
     height: 30px;
 }
@@ -31,5 +31,32 @@ img {
     #progressBar div {
         display: inline-block;
         height: 100%;
-        margin: 0px;
+        margin: 0;
     }
+
+.goalInput {
+    box-sizing: border-box;
+    width: 30px;
+    height: 30px;
+    padding: 5px;
+    border: 1px solid #CCC;
+    vertical-align: top;
+}
+
+button.goalInput {
+    background-color: #DEDEDE;
+    cursor: pointer;
+}
+
+button img {
+    width: 100%;
+    height: 100%;
+}
+
+#goalForm {
+    display: inline;
+}
+
+#editGoal{
+    margin-left: 20px;
+}

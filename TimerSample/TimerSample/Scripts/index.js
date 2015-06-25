@@ -21,12 +21,40 @@ $(document).ready(function () {
         timer.reset();
         showTime();
     });
-    $('#goal').keyup(function () {
-        var timeValues = $('#goal').val().split(':');
-        var goal = timeValues[0] * 60 * 60 * 1000 +
-                   timeValues[1] * 60 * 1000 +
-                   timeValues[2] * 1000;
-        timer.goal = goal ? goal : null;
+    $('#editGoal').click(function () {
+        $('#goal').hide();
+        $('#editGoal').hide();
+        $('#goalForm').show();
+    });
+    $('input[type=text].goalInput').keydown(function (event) {
+        var allowedKeyCodes = [8, 9, 13, 46, 37, 38, 39, 40] //Backspace, Tab, Enter, Delete, Arrow Keys
+        if (($.inArray(event.which,allowedKeyCodes) === -1) && isNaN(String.fromCharCode(event.which))) {
+            event.preventDefault();
+        }
+
+    });
+    $('#goalSubmit').click(function () {
+        var hours = $('#goalHours').val() || '00';
+        var minutes = $('#goalMinutes').val() || '00';
+        var seconds = $('#goalSeconds').val() || '00';
+        var goal = hours * MILI_SECONDS_IN_HOUR +
+                   minutes * MILI_SECONDS_IN_MINUTE +
+                   seconds * MILI_SECONDS_IN_SECOND;
+        if (goal) {
+            timer.goal = goal;
+            $('#goal').html([hours, minutes, seconds].join(':'));
+            $('#goalHours').val(hours);
+            $('#goalMinutes').val(minutes);
+            $('#goalSeconds').val(seconds);
+        }
+        else {
+            timer.goal = null;
+            $('#goal').html('None');
+        }
+        $('#goal').show();
+        $('#editGoal').show();
+        $('#goalForm').hide();
+        return false;
     });
     function showTime() {
         var currentTime = timer.getElapsedMilliseconds();
@@ -36,7 +64,7 @@ $(document).ready(function () {
         currentTime -= minutes * MILI_SECONDS_IN_MINUTE;
         var seconds = Math.floor(currentTime / MILI_SECONDS_IN_SECOND);
         currentTime -= MILI_SECONDS_IN_SECOND * seconds;
-        $('#time').html(pad(hours,2) + "." + pad(minutes,2) + "." + pad(seconds,2) + "." + pad(currentTime,2));
+        $('#time').html(pad(hours, 2) + "." + pad(minutes, 2) + "." + pad(seconds, 2) + "." + pad(currentTime, 2));
         showProgressBar();
     }
 
@@ -63,4 +91,8 @@ $(document).ready(function () {
         $('#filledBar').css('background-color', 'green');
         $('#emptyBar').css('background-color', failedDeadline ? 'red' : 'inherit');
     }
+
+    (function initPage() {
+        $('#goalForm').hide();
+    }())
 });

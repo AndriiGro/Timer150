@@ -1,0 +1,187 @@
+﻿body {
+    margin: 40px;
+}
+
+div {
+    font-size: 25px;
+}
+
+.timerButton {
+    cursor: pointer;
+    display: inline-block;
+    font-size: 32px;
+    width: 50px;
+    height: 50px;
+}
+
+header {
+    margin-bottom: 50px;
+}
+
+img {
+    width: 30px;
+    height: 30px;
+}
+
+.content {
+    width: 100%;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#progressBar {
+    margin-top: 20px;
+    height: 20px;
+}
+
+    #progressBar div {
+        display: inline-block;
+        height: 100%;
+        margin: 0;
+    }
+
+.row {
+    margin-bottom: 0 !important;
+}
+
+.goalInput {
+    box-sizing: border-box;
+    width: 30px;
+    height: 30px;
+    padding: 5px;
+    border: 1px solid #CCC;
+    vertical-align: top;
+}
+
+button.goalInput {
+    background-color: #DEDEDE;
+    cursor: pointer;
+}
+
+button img {
+    width: 100%;
+    height: 100%;
+}
+
+#goalForm {
+    display: inline;
+}
+
+.input-field {
+    margin-top: 0 !important;
+}
+
+    .input-field input {
+        max-width: 60px;
+    }
+
+#editGoal {
+    margin-left: 20px;
+}
+
+.progress .determinate {
+    height: 10px;
+    position: relative !important;
+}
+/*---------------------------*/
+/*Material design starts here*/
+/*---------------------------*/
+html {
+    text-align: center;
+    background-color: #EFEFEF;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.wrapper {
+    width: 100vw;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.app {
+    width: 300vw;
+    transition: 0.4s;
+}
+
+.container {
+    position: relative;
+    float: left;
+    width: 100vw;
+    max-width: none; /* canceling auto styles from materialize.css */
+}
+
+.clock {
+    position: relative;
+    height: 300px;
+    display: block;
+    margin: auto;
+    font-size: 150px;
+    color: #0277BD;
+    text-align: center;
+    line-height: 300px;
+    background-color: #fff;
+    border-radius: 2px;
+    transition: all 0.4s ease-in, box-shadow 0.2s;
+}
+
+    .clock.inactive {
+        color: #9e9e9e;
+    }
+
+    .clock .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+/*-----------------------
+	Modes
+-----------------------*/
+
+.switch-clocks {
+    transition: background-color 0.4s;
+    cursor: default;
+}
+
+.alarm-mode .switch-clocks {
+    background-color: #E91E63;
+}
+
+.alarm-mode header .alarm,
+.stopwatch-mode header .stopwatch,
+.timer-mode header .timer {
+    background-color: rgba(255,255,255,0.2);
+    pointer-events: none;
+}
+
+.stopwatch-mode .switch-clocks {
+    background-color: #607D8B;
+}
+
+.timer-mode .switch-clocks {
+    background-color: #00ACC1;
+}
+
+.switch-clocks a {
+    color: #fff;
+    padding: 30px 40px;
+}
+
+.alarm-mode .app {
+    transform: translate(0);
+    -webkit-transform: translate(0);
+}
+
+.stopwatch-mode .app {
+    transform: translate(-100vw);
+    -webkit-transform: translate(-100vw);
+}
+
+.timer-mode .app {
+    transform: translate(-200vw);
+    -webkit-transform: translate(-200vw);
+}

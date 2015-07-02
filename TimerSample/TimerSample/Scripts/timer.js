@@ -27,6 +27,9 @@ Timer.prototype.pause = function () {
     this.isActive = false;
     this._lastStartTime = null;
 }
+Timer.prototype.toggle = function () {
+    this.isActive ? this.pause() : this.start();
+}
 Timer.prototype.getElapsedMilliseconds = function () {
     var total = 0;
     for (var i = 0; i < this._activeIntervals.length; i++) {

@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Timer Sample</title>
+    <link rel="stylesheet" type="text/css" href="content/styles.css">
+    <link rel="stylesheet" type="text/css" href="content/materialize/css/materialize.css">
+    <script type="text/javascript" src="scripts/jquery/jquery-2.1.4.js"></script>
+    <script type="text/javascript" src="scripts/materialize/materialize.js"></script>
+    <script type="text/javascript" src="scripts/timer.js"></script>
+    <script type="text/javascript" src="scripts/index.js"></script>
+
+</head>
+<body class="stopwatch-mode">
+    <header class="switch-clocks">
+        <div class="center">
+            <a class="alarm waves-effect">Alarm</a>
+            <a class="stopwatch waves-effect">Stopwatch</a>
+            <a class="timer waves-effect">Timer</a>
+        </div>
+    </header>
+    <div class="content">
+        <div class="row">
+            <div class="col center">
+                <a class="timerButton waves-effect" id="start">
+                    <i class="mdi-av-play-arrow"></i>
+                </a>
+                <a class="timerButton waves-effect" id="pause">
+                    <i class="mdi-av-pause"></i>
+                </a>
+                <a class="timerButton waves-effect" id="reset">
+                    <i class="mdi-av-loop"></i>
+                </a>
+            </div>
+            <div class="col right">
+                <div class="row">
+                    <div class="col">
+                        <span>Goal:</span>
+                        <span id="goal">None</span>
+                        <a class="timerButton" id="editGoal">
+                            <i class="mdi-action-settings"></i>
+                        </a>
+                    </div>
+                    <form id="goalForm">
+                        <div class="input-field col">
+                            <input placeholder="hours" id="goalHours" type="text" maxlength="2" value="00">
+                            <label for="goalHours">hours</label>
+                        </div>
+                        <div class="input-field col">
+                            <input placeholder="minutes" id="goalMinutes" type="text" maxlength="2" value="00">
+                            <label for="goalMinutes">minutes</label>
+                        </div>
+                        <div class="input-field col">
+                            <input placeholder="seconds" id="goalSeconds" type="text" maxlength="2" value="00">
+                            <label for="goalSeconds">seconds</label>
+                        </div>
+                        <div class="col">
+                            <a class="timerButton col" id="goalSubmit">
+                                <i class="mdi-action-done"></i>
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="alarm center">
+            <div class="clock z-depth-1 inactive">
+                <span id="time">00.00.00.000</span>
+                <div class="overlay waves-effect"></div>
+            </div>
+        </div>
+        <div id="progressBar" class="progress center z-depth-1-half">
+            <div id="filledBar" class="determinate left"></div>
+            <div id="emptyBar" class="determinate right"></div>
+        </div>
+    </div>
+</body>
+</html>

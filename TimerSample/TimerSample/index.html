@@ -1,78 +1,99 @@
-﻿<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <title>Timer Sample</title>
-    <link rel="stylesheet" type="text/css" href="content/styles.css">
-    <link rel="stylesheet" type="text/css" href="content/materialize/css/materialize.css">
-    <script type="text/javascript" src="scripts/jquery/jquery-2.1.4.js"></script>
-    <script type="text/javascript" src="scripts/materialize/materialize.js"></script>
-    <script type="text/javascript" src="scripts/hammer/jquery.hammer.js"></script>
-    <script type="text/javascript" src="scripts/timer.js"></script>
-    <script type="text/javascript" src="scripts/index.js"></script>
+<!DOCTYPE html>
+<html ng-app="TimingApp">
 
+<head>
+    <!-- Angular Material CSS -->
+    <link rel="stylesheet" href="assets/css/angular-material.min.css">
+    <style>
+        .blue {
+            background-color: #f3f3f3;
+        }
+    </style>
 </head>
-<body class="stopwatch-mode">
-    <header class="switch-clocks">
-        <div class="center">
-            <a class="alarm waves-effect">Alarm</a>
-            <a class="stopwatch waves-effect">Stopwatch</a>
-            <a class="timer waves-effect">Timer</a>
-        </div>
-    </header>
-    <div class="content">
-        <div class="row">
-            <div class="col center">
-                <a class="timerButton waves-effect" id="start">
-                    <i class="mdi-av-play-arrow"></i>
-                </a>
-                <a class="timerButton waves-effect" id="pause">
-                    <i class="mdi-av-pause"></i>
-                </a>
-                <a class="timerButton waves-effect" id="reset">
-                    <i class="mdi-av-loop"></i>
-                </a>
-            </div>
-            <div class="col right">
-                <div class="row">
-                    <div class="col">
-                        <span>Goal:</span>
-                        <span id="goal">None</span>
-                        <a class="timerButton" id="editGoal">
-                            <i class="mdi-action-settings"></i>
-                        </a>
+
+<body>
+    <md-tabs md-dynamic-height md-border-bottom md-center-tabs>
+        <md-tab label="Stopwatch">
+            <md-content ng-controller="StopwatchController as vm">
+                <div layout="row" layout-wrap>
+                    <div flex="60" offset="20">
+                        <div layout="column">
+                            <div layout="row" layout-align="center center">
+                                <div flex="30">
+                                    <md-button ng-disabled="started && !paused" ng-click="start()" class="md-icon-button">
+                                        <md-icon md-svg-src="assets/img/icon-play.svg" style="width: 24px; height: 24px;"></md-icon>
+                                    </md-button>
+                                    <md-button ng-disabled="!started || paused" ng-click="pause()" class="md-icon-button">
+                                        <md-icon md-svg-src="assets/img/icon-pause.svg" style="width: 24px; height: 24px;"></md-icon>
+                                    </md-button>
+                                    <md-button ng-disabled="!started" ng-click="restart()" class="md-icon-button">
+                                        <md-icon md-svg-src="assets/img/icon-restart.svg" style="width: 24px; height: 24px;"></md-icon>
+                                    </md-button>
+                                </div>
+								<div flex = "10">
+								<span> Goal: <span>
+								</div>
+								<div flex = "50" layout="row"> 
+									<div ng-show="showInput">
+										<md-input-container style="width: 20%; float: left" >
+											<input  ng-model="targetHours" style="margin-top: 35%"/>
+										</md-input-container >
+										<md-input-container style=" width: 20%; float: left">
+											<input ng-model="targetMinutes" style="margin-top: 35%"/>
+										</md-input-container>
+										<md-input-container style=" width: 20%;">
+											<input ng-model="targetSec" style="margin-top: 35%"/>
+										</md-input-container>
+									</div>
+									<div ng-hide="showInput"  >
+										<span> {{targetHours + " . " + targetMinutes + " . " + targetSec}}</span>
+									</div>
+								</div>
+									
+								<div>
+									<md-button class="md-icon-button" ng-hide="showInput" ng-click="toggleInputs()">
+                                        <md-icon md-svg-src="assets/img/icon-ok.svg" style="width: 24px; height: 24px;"></md-icon>
+                                    </md-button>
+                               
+                                    <md-button class="md-icon-button" ng-show="showInput" ng-click="toggleInputs()">
+                                        <md-icon md-svg-src="assets/img/icon-settings.svg" style="width: 24px; height: 24px;"></md-icon>
+                                    </md-button>
+								</div>
+                                     
+                                    
+                            </div>
+                            <md-progress-linear md-mode="determinate" value="{{(counter - prevTarget) / target * 100}}"></md-progress-linear>
+                            <!-- TO DO: fix this -->
+                            <md-whiteframe class="md-display-2 md-whiteframe-z5" layout="row" style="padding: 10%; margin: 10px">
+                                <span flex>{{hours}} </span> <span flex>{{minutes}} </span> <span flex>{{seconds}} </span> <span flex>{{milliseconds}} </span>
+                            </md-whiteframe>
+                            
+                           
+
+
+
+
+
+                        </div>
                     </div>
-                    <form id="goalForm">
-                        <div class="input-field col">
-                            <input placeholder="hours" id="goalHours" type="text" maxlength="2" value="00">
-                            <label for="goalHours">hours</label>
-                        </div>
-                        <div class="input-field col">
-                            <input placeholder="minutes" id="goalMinutes" type="text" maxlength="2" value="00">
-                            <label for="goalMinutes">minutes</label>
-                        </div>
-                        <div class="input-field col">
-                            <input placeholder="seconds" id="goalSeconds" type="text" maxlength="2" value="00">
-                            <label for="goalSeconds">seconds</label>
-                        </div>
-                        <div class="col">
-                            <a class="timerButton col" id="goalSubmit">
-                                <i class="mdi-action-done"></i>
-                            </a>
-                        </div>
-                    </form>
                 </div>
-            </div>
-        </div>
-        <div class="alarm center">
-            <div class="clock z-depth-1 inactive">
-                <span id="time">00.00.00.000</span>
-                <div class="overlay waves-effect"></div>
-            </div>
-        </div>
-        <div id="progressBar" class="progress center z-depth-1-half">
-            <div id="filledBar" class="determinate left"></div>
-            <div id="emptyBar" class="determinate right"></div>
-        </div>
-    </div>
+            </md-content>
+        </md-tab>
+
+        <md-tab label="Timer">
+        </md-tab>
+
+        <md-tab label="Alarm">
+        </md-tab>
+    </md-tabs>
+
+    <!-- Angular Material dependencies -->
+    <script src="assets/js/angular.min.js"></script>
+    <script src="assets/js/angular-animate.min.js"></script>
+    <script src="assets/js/angular-aria.min.js"></script>
+    <!-- Angular Material -->
+    <script src="assets/js/angular-material.min.js"></script>
+    <script src="js/scripts.js"></script>
 </body>
+
 </html>
